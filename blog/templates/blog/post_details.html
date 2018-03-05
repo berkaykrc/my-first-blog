@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="post">
+    {% if gonderi.olusturma_tarihi %}
+    <div class="date">
+        {{ gonderi.olusturma_tarihi }}
+
+    </div>
+    {% endif %}
+    <h1>{{gonderi.baslik}}</h1>
+    <p>{{ gonderi.yazi|linebreaksbr}}</p>
+</div>
+{% endblock %}

@@ -1,20 +1,13 @@
-<html>
+{% extends 'blog/base.html' %}
 
-<head>
-    <title>Berkay'ın İndirim Blogu</title>
-</head>
 
-<body>
-    <div>
-        <h1><a href="/">Berkay'ın İndirim Blogu</a></h1>
-    </div>
-    {%for gonderi in gonderiler%}
-    <div>
+{% block content %}
+{% for gonderi in gonderiler%}
+<div class="post">
+    <div class="date">
         <p>yayinlanma tarihi: {{gonderi.olusturma_tarihi}}</p>
-        <h1><a href="/">{{gonderi.baslik}}</a></h1>
-        <p>{{gonderi.yazi|linebreaksbr}}</p>
-        {%endfor%}
     </div>
-</body>
-
-</html>
+    <h1><a href="{% url 'post_detail' pk=gonderi.pk %}">{{gonderi.baslik}}</a></h1>
+    <p>{{gonderi.yazi|linebreaksbr}}</p>
+</div>
+{%endfor%} {% endblock %}
