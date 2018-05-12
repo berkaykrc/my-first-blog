@@ -39,7 +39,7 @@
                         <span class="nav-link" style="color:rgb(255, 255, 255)"><i class="fa fa-user-circle"></i>  Hoşgeldin, {{ user.username }} <small> (<a href="{% url 'logout' %}">Çıkış</a>)</small></span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'post_new' %}"><span class="fa fa-plus"></span>asd</a>
+                        <a class="nav-link" href="{% url 'post_new' %}"><span class="fa fa-plus"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{%  url 'post_draft_list' %}"><span class="fa fa-file-text"></span></a>
@@ -71,21 +71,25 @@
             <!-- Post Content Column -->
             <div class="col-lg-8">
                 <!-- Title -->
-                <h1 class="mt-4">{{gonderi.baslik}}</h1>{% if user.is_authenticated %}
-                <a href="{% url 'post_edit' pk=gonderi.pk %}"><span class="fa fa-pencil-square fa-2x"><small>Metni Düzenle</small></span></a> {% endif %}
-
+                <h1 class="mt-4">{{gonderi.baslik}}</h1>
+                {% if user.is_authenticated %}
+                <a href="{% url 'post_edit' pk=gonderi.pk %}"><span class="fa fa-pencil-square fa-2x"><small>Metni Düzenle</small></span></a> &emsp;
+                <a href="{% url 'post_remove' pk=gonderi.pk %}"> <span class="fa fa-trash fa-2x"></span> Metni Sil</a>
+                {% endif %}
                 <!-- Author -->
                 <p class="lead">
                     <a href="#">{{gonderi.yazari}} </a> tarafından yayınlandı.
                 </p>
 
-                <hr> {% if gonderi.olusturma_tarihi %}
+                <hr>
+                {% if gonderi.olusturma_tarihi %}
                 <!-- Date/Time -->
                 <p><span class="fa fa-clock-o"></span> {{gonderi.olusturma_tarihi}} tarihinde</p>
-
+                {% else %}
+                <a class="fa fa-share" href="{% url 'post_publish' pk=gonderi.pk %}">Yayınla</a>
                 <hr> {% endif %}
                 <!-- Preview Image -->
-                <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+                <img class="img-fluid rounded" src="http://logo-logos.com/wp-content/uploads/2016/10/Bershka_logo.png" alt="">
 
                 <hr>
 

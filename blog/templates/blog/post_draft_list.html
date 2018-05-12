@@ -1,10 +1,10 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    {% for gonderi in gonderiler %}
+    {% for gonderi in posts %}
     <div class="card mb-4">
-            <p>olusturuldu: {{ post.olusturma_tarihi|date:'d-m-Y' }}</p>
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ gonderi.baslik }}</a></h1>
+            <p>olusturuldu: {{ gonderi.olusturma_tarihi}}</p>
+            <h1><a href="{% url 'post_detail' pk=gonderi.pk %}">{{ gonderi.baslik }}</a></h1>
             <p>{{ gonderi.yazi|truncatechars:200 }}</p>
 </div>
     {% endfor %}
