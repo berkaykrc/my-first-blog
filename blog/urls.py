@@ -9,9 +9,19 @@ urlpatterns = [
     re_path(r'^drafts/$', views.post_draft_list, name='post_draft_list'),
     re_path(r'^zara/$', views.zara, name='zara'),
     re_path(r'^bershka$', views.bershka, name='bershka'),
-    re_path(r'^post/(?P<pk>\d+)/publish/$', views.post_publish, name='post_publish'),
-    re_path(r'^post/(?P<pk>\d+)/remove/$', views.post_remove, name='post_remove'),
-
-
-
+    re_path(r'^h&m$', views.hm, name='h&m'),
+    re_path(r'^pull&bear$', views.pullnbear, name='pull&bear'),
+    re_path(r'^stradivarius$', views.stradivarius, name='stradivarius'),
+    re_path(r'^mango$', views.mango, name='mango'),
+    re_path(r'^post/(?P<pk>\d+)/publish/$',
+            views.post_publish, name='post_publish'),
+    re_path(r'^post/(?P<pk>\d+)/remove/$',
+            views.post_remove, name='post_remove'),
+    re_path(r'^post/(?P<pk>\d+)/comment/$',
+            views.add_comment_to_post, name='add_comment_to_post'),
+    re_path(r'^comment/(?P<pk>\d+)/approve/$',
+            views.comment_approve, name='comment_approve'),
+    re_path(r'^comment/(?P<pk>\d+)/remove/$',
+            views.comment_remove, name='comment_remove'),
+    re_path(r'^category/(?P<category_slug>[-\w+])/$', views.list_of_post_by_category, name='list_of_post_by_category'),
 ]
