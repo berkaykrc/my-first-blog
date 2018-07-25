@@ -1,25 +1,27 @@
 {% extends 'blog/base.html' %} {% block content %}
-<!-- Blog Post -->
-{% for gonderi in gonderiler %}
-<div class="card mb-4">
-    <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/1200px-Zara_Logo.svg.png" alt="Card image cap">
-    <div class="card-body">
-        <h2 class="card-title">{{gonderi.baslik}}</a></h2>
-        <p class="card-text">{{gonderi.yazi|linebreaksbr|truncatechars:200}}</p>
-        <a href="{% url 'post_detail' pk=gonderi.pk %}" class="btn btn-primary">Devamını için &rarr;</a>
-    </div>
-    <div class="card-footer text-muted">
-        <span class="fa fa-clock-o"></span> {{gonderi.olusturma_tarihi}} tarihinde
-        <a href="#">{{gonderi.yazari}}</a> tarafından yayınlandı.
-    </div>
-</div>
+    <!-- Blog Post -->
+    {% for gonderi in gonderiler %}
+        <div class="card mb-4">
+            <img class="card-img-top"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/1200px-Zara_Logo.svg.png"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h2 class="card-title">{{ gonderi.baslik }}</h2>
+                <p class="card-text">{{ gonderi.yazi|linebreaksbr|truncatechars:200 }}</p>
+                <a href="{% url 'post_detail' pk=gonderi.pk %}" class="btn btn-primary">Devamını için &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                <span class="fa fa-clock-o"></span> {{ gonderi.olusturma_tarihi }} tarihinde
+                <a href="#">{{ gonderi.yazari }}</a> tarafından yayınlandı.
+            </div>
+        </div>
 
-{%endfor%}<!-- Pagination -->
-<ul class="pagination justify-content-center mb-4">
-    <li class="page-item">
-        <a class="page-link" href="#">&larr; Eski</a>
-    </li>
-    <li class="page-item disabled">
-        <a class="page-link" href="#">Yeni  &rarr;</a>
-    </li>
-</ul> {% endblock %}
+    {% endfor %}<!-- Pagination -->
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+            <a class="page-link" href="#">&larr; Eski</a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Yeni &rarr;</a>
+        </li>
+    </ul> {% endblock %}

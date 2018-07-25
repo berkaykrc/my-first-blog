@@ -17,217 +17,231 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="{% static 'css\blog-post.css' %}" rel="stylesheet">
+    <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'post_list' %}">Berkay'ın İndirim Blogu</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'post_list' %}">Berkay'ın İndirim Blogu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    {%if user.is_authenticated%}
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <span class="nav-link" style="color:rgb(255, 255, 255)"><i class="fa fa-user-circle"></i>  Hoşgeldin, {{ user.username }} <small> (<a href="{% url 'logout' %}">Çıkış</a>)</small></span>
+                        <span class="nav-link" style="color:rgb(255, 255, 255)"><i class="fa fa-user-circle"></i>  Hoşgeldin, {{ user.username }} <small> (<a
+                                href="{% url 'logout' %}">Çıkış</a>)</small></span>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'post_new' %}"><span class="fa fa-plus"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{%  url 'post_draft_list' %}"><span class="fa fa-file-text"></span></a>
+                        <a class="nav-link" href="{% url 'post_draft_list' %}"><span class="fa fa-file-text"></span></a>
                     </li>
-                    {% else %}
+                {% else %}
                     <li class="nav-item">
                         <a class="nav-link activate" href="{% url 'login' %}"><span class="fa fa-user"> </span></a>
                     </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'post_list' %}"><span class="fa fa-home"> </span> </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="fa fa-info"> </span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="mailto:berkay.kirci@gmail.com?subject=feedback"> <span class="fa fa-envelope" > </span> </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-
-            <!-- Post Content Column -->
-            <div class="col-lg-8">
-                <!-- Title -->
-                <h1 class="mt-4">{{gonderi.baslik}}</h1>
-                {% if user.is_authenticated %}
-                <a href="{% url 'post_edit' pk=gonderi.pk %}"><span class="fa fa-pencil-square fa-2x"><small>Metni Düzenle</small></span></a> &emsp;
-                <a href="{% url 'post_remove' pk=gonderi.pk %}"> <span class="fa fa-trash fa-2x"></span> Metni Sil</a>
                 {% endif %}
-                <!-- Author -->
-                <p class="lead">
-                    <a href="#">{{gonderi.yazari}} </a> tarafından yayınlandı.
-                </p>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_list' %}"><span class="fa fa-home"> </span> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><span class="fa fa-info"> </span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="mailto:berkay.kirci@gmail.com?subject=feedback"> <span
+                            class="fa fa-envelope"> </span> </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-                <hr>
-                {% if gonderi.olusturma_tarihi %}
-                <!-- Date/Time -->
-                <p><span class="fa fa-clock-o"></span> {{gonderi.olusturma_tarihi}} tarihinde</p>
-                {% else %}
-                <a class="fa fa-share" href="{% url 'post_publish' pk=gonderi.pk %}">Yayınla</a>
-                <hr> {% endif %}
-                <!-- Preview Image -->
-                <img class="img-fluid rounded" src="http://logo-logos.com/wp-content/uploads/2016/10/Bershka_logo.png" alt="">
+<!-- Page Content -->
+<div class="container">
 
-                <hr>
+    <div class="row">
 
-                <!-- Post Content -->
-                <p class="lead">{{gonderi.yazi|linebreaksbr}}</p>
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Title -->
+            <h1 class="mt-4">{{ gonderi.baslik }}</h1> {% if user.is_authenticated %}
+            <a href="{% url 'post_edit' pk=gonderi.pk %}"><span class="fa fa-pencil-square fa-2x"><small>Metni Düzenle</small></span></a>
+            &emsp;
+            <a href="{% url 'post_remove' pk=gonderi.pk %}"> <span class="fa fa-trash fa-2x"></span> Metni
+                Sil</a> {% endif %}
+            <!-- Author -->
+            <p class="lead">
+                <a href="#">{{ gonderi.yazari }} </a> tarafından yayınlandı.
+            </p>
 
-                <hr>
-                <!-- Comments Form -->
-                {% if user.is_authenticated %}
+            <hr> {% if gonderi.olusturma_tarihi %}
+            <!-- Date/Time -->
+            <p><span class="fa fa-clock-o"></span> {{ gonderi.olusturma_tarihi }} tarihinde</p>
+        {% else %}
+            <a class="fa fa-share" href="{% url 'post_publish' pk=gonderi.pk %}">Yayınla</a>
+            <hr> {% endif %}
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="" alt="">
+
+            <hr>
+
+            <!-- Post Content -->
+            <p class="lead">{{ gonderi.yazi|linebreaksbr }}</p>
+
+            <hr>
+            <!-- Comments Form -->
+            {% if user.is_authenticated %}
 
                 <div class="card my-4">
-                    <h5 class="card-header"> <span class="fa fa-comments"></span>  Yorum bırakın</h5>
+                    <h5 class="card-header"><span class="fa fa-comments"></span> Yorum bırakın</h5>
                     <div class="card-body">
                         <form>
                             <div class="form-group">
                                 <textarea class="form-control" rows="3"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Yorumunu Gönder</button>
+                            <button type="submit" class="btn btn-primary"
+                                    href="{% url 'add_comment_to_post' pk=gonderi.pk %}">Yorumunu Gönder
+                            </button>
                         </form>
                     </div>
                 </div>
-
-                <!-- Single Comment -->
-                <div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-                        congue felis in faucibus.
-                    </div>
-                </div>
-
-                <!-- Comment with nested comments -->
-
-                <div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-                        congue felis in faucibus.
-
-                        <div class="media mt-4">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            <div class="media-body">
-                                <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-                                lacinia congue felis in faucibus.
+                {% for comment in gonderi.comments.all %} {% if user.is_authenticated or comment.approved_comment %}
+                    <!-- Single Comment -->
+                    <div class="media mb-4">
+                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        <div class="media-body">
+                            <div class="date">{{ comment.created_date }} {% if not comment.approved_comment %}
+                                <a href="{% url 'comment_remove' pk=comment.pk %}"> <span class="fa fa-times"></span>
+                                </a>
+                                <a href="{% url 'comment_approve' pk=comment.pk %}"> <span class="fa fa-check"></span>
+                                </a> {% endif %}
                             </div>
+                            <h5 class="mt-0">{{ comment.author }}</h5> {{ comment.text |linebreaksbr }}
                         </div>
-
-                        <div class="media mt-4">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            <div class="media-body">
-                                <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-                                lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-                {%else%}
-                <div style="height: 228px">
-                    <nav id="mainmenu" class="navbar navbar-default">Giriş yapmadan gönderiye yorum yapamazsınız..!</nav>
-                </div>
-                {%endif%}
-            </div>
 
-            <!-- Sidebar Widgets Column -->
-            <div class="col-md-4">
+                    <!-- Comment with nested comments -->
 
-                <!-- Search Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Arama <i class="fa fa-search"></i></h5>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Arayacağınız şey...">
-                            <span class="input-group-btn">
+                    <div class="media mb-4">
+                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        <div class="media-body">
+                            <h5 class="mt-0">{{ comment.author }}</h5> {{ comment.text|linebreaksbr }}
+
+                            <div class="media mt-4">
+                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                                <div class="media-body">
+                                    <h5 class="mt-0">{{ comment.author }}</h5> {{ comment.text|linebreaksbr }}
+                                </div>
+                            </div>
+
+                            <div class="media mt-4">
+                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                                <div class="media-body">
+                                    <h5 class="mt-0">{{ comment.author }}</h5> {{ comment.text|linebreaksbr }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endif %} {% empty %}
+                    <div>
+                        <nav id="mainmenu" class="navbar navbar-default" style="height: 168px;">
+                            Daha Yorum Yapılmamış
+                        </nav>
+                    </div>
+                {% endfor %} {% else %}
+
+                <div style="height: 465px">
+                    <nav id="mainmenu" class="navbar navbar-default">Giriş yapmadan gönderiye yorum yapamazsınız..!
+                    </nav>
+                </div>
+            {% endif %}
+
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Arama <i class="fa fa-search"></i></h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Arayacağınız şey...">
+                        <span class="input-group-btn">
                   <button class="btn btn-secondary" type="button">Ara!</button>
                 </span>
-                        </div>
                     </div>
                 </div>
-
-                <!-- Categories Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header"><i class="fa fa-star"></i> Popüler Mağazalar  <i class="fa fa-star"></i> </h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">Berskha</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{zara}}">Zara</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">H&M</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">Pull & Bear</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Stradivarius</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Mango</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Side Widget -->
-                <!--<div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                        You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                    </div>
-                </div> -->
-
             </div>
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header"><i class="fa fa-star"></i> Popüler Mağazalar <i class="fa fa-star"></i></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="{% url 'bershka' %}">Bershka</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'zara' %}">Zara</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'h&m' %}">H&M</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="{% url 'pull&bear' %}">Pull & Bear</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'stradivarius' %}">Stradivarius</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'mango' %}">Mango</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Side Widget -->
+            <!--<div class="card my-4">
+                <h5 class="card-header">Side Widget</h5>
+                <div class="card-body">
+                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                </div>
+            </div> -->
 
         </div>
-        <!-- /.row -->
 
     </div>
-    <!-- /.container -->
+    <!-- /.row -->
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; indirimblogu.com 2018</p>
-        </div>
-        <!-- /.container -->
-    </footer>
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; indirimblogu.com 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
 
 </body>
 
